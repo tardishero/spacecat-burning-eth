@@ -70,9 +70,15 @@ const Home: NextPage = () => {
 
   const [spaceKittyNftClaimAmount, setSpaceKittyNftClaimAmount] =
     useState<number>(0);
+  const [spaceKittyNftLastClaimed, setSpaceKittyNftLastClaimed] =
+    useState<number>(0);
   const [spaceOwlsNftClaimAmount, setSpaceOwlsNftClaimAmount] =
     useState<number>(0);
+  const [spaceOwlsNftLastClaimed, setSpaceOwlsNftlastClaimed] =
+    useState<number>(0);
   const [dragonDoodleClaimAmount, setDragonDoodleClaimAmount] =
+    useState<number>(0);
+  const [dragonDoodleLastClaimed, setDragonDoodlelastClaimed] =
     useState<number>(0);
 
   const provider =
@@ -135,6 +141,44 @@ const Home: NextPage = () => {
       setDragonDoodleCounts(data.length);
     });
 
+    const totalReward = await SpaceKittyNFTStakingContract.getPendingRewards(
+      account
+    );
+    setSpaceKittyNftClaimAmount(
+      Number(parseFloat(ethers.utils.formatEther(totalReward)).toFixed(4))
+    );
+
+    const lastClaimedStated = await SpaceKittyNFTStakingContract.lastClaimed(
+      account
+    );
+    console.log("lastClaimedStated->", Number(lastClaimedStated));
+    setSpaceKittyNftLastClaimed(Number(lastClaimedStated));
+
+    const totalReward2 = await SpaceOwlsNFTStakingContract.getPendingRewards(
+      account
+    );
+    setSpaceOwlsNftClaimAmount(
+      Number(parseFloat(ethers.utils.formatEther(totalReward2)).toFixed(4))
+    );
+
+    const lastClaimedStated2 = await SpaceOwlsNFTStakingContract.lastClaimed(
+      account
+    );
+    setSpaceOwlsNftlastClaimed(Number(lastClaimedStated2));
+    console.log("lastClaimedStated2->", Number(lastClaimedStated2));
+
+    const totalReward3 = await DragonDoodleNFTStakingContract.getPendingRewards(
+      account
+    );
+    setDragonDoodleClaimAmount(
+      Number(parseFloat(ethers.utils.formatEther(totalReward3)).toFixed(4))
+    );
+
+    const lastClaimedStated3 = await DragonDoodleNFTStakingContract.lastClaimed(
+      account
+    );
+    setDragonDoodlelastClaimed(Number(lastClaimedStated3));
+
     setStartLoadingState(false);
   };
 
@@ -151,9 +195,24 @@ const Home: NextPage = () => {
         className="relative z-[48] min-h-[40vh] mt-[100px] w-full rounded-lg my-10
     border-none grid grid-cols-3 gap-10"
       >
-        <SpaceKittyClaimpage nftCounts={spaceKittyNftCounts} />
-        <SpaceOwlsClaimpage nftCounts={spaceOwlsNftCounts} />
-        <DragonDoodleClaimpage nftCounts={dragonDoodleCounts} />
+        <SpaceKittyClaimpage
+          nftCounts={spaceKittyNftCounts}
+          lastClaimed={spaceKittyNftLastClaimed}
+          claimAmount={spaceKittyNftClaimAmount}
+          getData={getData}
+        />
+        <SpaceOwlsClaimpage
+          nftCounts={spaceOwlsNftCounts}
+          lastClaimed={spaceOwlsNftLastClaimed}
+          claimAmount={spaceOwlsNftClaimAmount}
+          getData={getData}
+        />
+        <DragonDoodleClaimpage
+          nftCounts={dragonDoodleCounts}
+          lastClaimed={dragonDoodleLastClaimed}
+          claimAmount={dragonDoodleClaimAmount}
+          getData={getData}
+        />
       </div>
       {startLoadingState && (
         <div className="fixed top-0 bottom-0 left-0 right-0 flex z-[50] backdrop-blur-lg justify-center items-center flex-col gap-4">
