@@ -193,7 +193,7 @@ const Home: NextPage = () => {
     <main className="container flex flex-col items-center justify-center w-full min-h-screen lg:px-[100px] md:px-[30px] px-5">
       <div
         className="relative z-[48] min-h-[40vh] mt-[100px] w-full rounded-lg my-10
-    border-none grid grid-cols-3 gap-10"
+    border-none grid lg:grid-cols-3 grid-cols-1 md:grid-cols-2   gap-10"
       >
         <SpaceKittyClaimpage
           nftCounts={spaceKittyNftCounts}
