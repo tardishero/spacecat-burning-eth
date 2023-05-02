@@ -1,0 +1,38 @@
+:root {
+  --mc1: #01a3f4;
+  --mc2: #feeb1a;
+  --hc: #fff;
+  --bc: #fff;
+  --hff: 'Heebo', sans-serif;
+  --bff: 'Nunito', sans-serif;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Play&display=swap');
+
+html {
+  font-family: 'Play', sans-serif;
+  scroll-behavior: smooth !important;
+
+}
+
+.box-shadow-custom {
+  background: linear-gradient(195deg, rgb(102, 187, 106), rgb(67, 160, 71)) !important;
+  box-shadow:rgba(0, 0, 0, 0.14) 0rem 0.25rem 1.25rem 0rem, rgba(0, 187, 212, 0.4) 0rem 0.4375rem 0.625rem -0.3125rem !important
+}
+
+.container {
+  background-image: url('/img/homeBackground.png') !important;
+  min-height: 100vh;
+  width: 100% !important;
+  max-width: 100%;
+  background-size: cover !important;
+  background-position: center;
+  position: relative;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.bg-black {
+  background-color: black !important;
+}
